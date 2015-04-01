@@ -4,16 +4,16 @@ var gl;
 var NumVertices  = 36;
 var stringVertices = 12 * 6 + 20 * 6;
 var kubbaStart = stringVertices + NumVertices;
-var tetraCheck = false;
-var kubbaVertices = 0;
-var kubbaCount = 0;
-
 var yTrans = 0.0;
 var xTrans = 0.0;
 var zTrans = 0.0;
 
-var width = 20/6;
-var height = 2.0;
+var gridZ = 6.0;
+var gridY = 20.0;
+var gridX = 6.0;
+
+var width = gridZ/6;
+var height = gridY/20.0;
 
 var points = [];
 var colors = [];
@@ -32,7 +32,7 @@ var spinY = 0;
 var origX;
 var origY;
 
-var zDist = -20.0;
+var zDist = -10.0;
 
 var proLoc;
 var mvLoc;
@@ -45,12 +45,9 @@ window.onload = function init()
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
     makeGrid();
-    kubbur(3.0, 12.0, 2.0);
-    kubbur(5.0, 10.0, 4.0);
-    kubbur(2.0, 11.0, 5.0);
+    makeKubbur();
 	
-    
-    gl.viewport( 0, 0, canvas.width, canvas.height );
+	gl.viewport( 0, 0, canvas.width, canvas.height );
     gl.clearColor( 0.9, 1.0, 1.0, 1.0 );
     
     gl.enable(gl.DEPTH_TEST);
@@ -152,9 +149,59 @@ window.onload = function init()
     render();
 }
 
+///////////////////////////////////////////////////////
+function makeKubbur() {
+    quad( 1, 0, 3, 2 );
+    quad( 2, 3, 7, 6 );
+    quad( 3, 0, 4, 7 );
+    quad( 6, 5, 1, 2 );
+    quad( 4, 5, 6, 7 );
+    quad( 5, 4, 0, 1 );
+}
 
+function quad(a, b, c, d) 
+{
+	var vertices = [
+        vec3( -1, -1,  0 ),
+        vec3( -1,  0,  0 ),
+        vec3(  0,  0,  0 ),
+        vec3(  0, -1,  0 ),
+        vec3( -1, -1, -1 ),
+        vec3( -1,  0, -1 ),
+        vec3(  0,  0, -1 ),
+        vec3(  0, -1, -1 )
+    ];
+
+    var vertexColors = [
+        [ 0.0, 0.0, 0.0, 1.0 ],  // black
+        [ 1.0, 0.0, 0.0, 1.0 ],  // red
+        [ 1.0, 1.0, 0.0, 1.0 ],  // yellow
+        [ 0.0, 1.0, 0.0, 1.0 ],  // green
+        [ 0.0, 0.0, 1.0, 1.0 ],  // blue
+        [ 1.0, 0.0, 1.0, 1.0 ],  // magenta
+        [ 0.0, 1.0, 1.0, 1.0 ],  // cyan
+        [ 1.0, 1.0, 1.0, 1.0 ]   // white
+    ];
+
+    // We need to parition the quad into two triangles in order for
+    // WebGL to be able to render it.  In this case, we create two
+    // triangles from the quad indices
+    
+    //vertex color assigned by the index of the vertex
+    
+    var indices = [ a, b, c, a, c, d ];
+
+    for ( var i = 0; i < indices.length; ++i ) {
+        points.push( vertices[indices[i]] );
+        //colors.push( vertexColors[indices[i]] );
+    
+        // for solid colored faces use 
+        colors.push(vertexColors[6]);    
+    } 
+}
 //----------------------------------------------------------------------------
 // Define the transformation scale here (two scale functions in MV.js)
+
 function scale4( x, y, z )
 {
     if ( Array.isArray(x) && x.length == 3 ) {
@@ -171,6 +218,30 @@ function scale4( x, y, z )
     return result;
 }
 
+/*function randomKubbur(x, y, z, check) {
+	kubbur(x, y, z);
+	
+	var which = randomGen();
+	var side = randomGen();
+
+	if (which <= 2) {
+		if (side <= 2.5) kubbur(x-1, y, z, true);
+		else kubbur(x+1, y, z, true);
+	}
+	else if(which <= 3)
+		if (side <= 2.5) kubbur(3.0, 18.0, 3.0, true);
+		else kubbur(3.0, 20.0, 3.0, true);
+	else {
+		if (side <= 2.5) kubbur(3.0, 19.0, 4.0, true);
+		else kubbur(3.0, 19.0, 2.0, true);
+	}
+}
+
+function randomGen() {
+	return Math.random() * (4 - 1) + 1;
+}*/
+	
+
 function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -186,10 +257,10 @@ function render()
     
    	gridrender(ctm);
 		
-	tetrarender(ctm, xTrans, yTrans);
+	kubbaRender(ctm, xTrans, yTrans, zTrans);
 
 
-	console.log("xTrans = " + xTrans + " yTrans = "+ yTrans + " zTrans = " + zTrans);
+	//console.log("xTrans = " + xTrans + " yTrans = "+ yTrans + " zTrans = " + zTrans);
 	
 	
 	

@@ -1,8 +1,3 @@
-var gridZ = 20.0;
-var gridY = 40.0;
-
-var NumVertices  = 36;
-var stringVertices = 12 * 6 + 20 * 6;
 
 function makeGrid() {
 	createStrings();
@@ -11,21 +6,21 @@ function makeGrid() {
 
 function colorCube()
 {
-    quad( 1, 0, 3, 2 );
-    quad( 2, 3, 7, 6 );
-    quad( 3, 0, 4, 7 );
-    quad( 6, 5, 1, 2 );
-    quad( 4, 5, 6, 7 );
-    quad( 5, 4, 0, 1 );
+    quadGrid( 1, 0, 3, 2 );
+    quadGrid( 2, 3, 7, 6 );
+    quadGrid( 3, 0, 4, 7 );
+    quadGrid( 6, 5, 1, 2 );
+    quadGrid( 4, 5, 6, 7 );
+    quadGrid( 5, 4, 0, 1 );
 }
 
 function createStrings() {
-	var xCoord = 10.2;
-	var yCoord = 20.2;
-	var zCoord = 10.2;
+	var xCoord = 3.01;
+	var yCoord = 10.01;
+	var zCoord = 3.01;
 	
-	var yChange = (gridY / 2)+0.2;
-	var zChange = (gridZ / 2)+0.2;
+	var yChange = (gridY / 2)+0.01;
+	var zChange = (gridZ / 2)+0.01;
 	for (var i = 0; i < 6; i++) {
 		//Horizontal
 		points.push([-xCoord, -yCoord, gridZ - zChange ]);
@@ -78,23 +73,27 @@ function createStrings() {
     	colors.push([ 0.0, 0.0, 0.0, 1.0 ]);
     	
     	
-    	yChange += 2.0;
+    	yChange += gridY / 20;
 	}
 	
 }
 
 
-function quad(a, b, c, d) 
+function quadGrid(a, b, c, d) 
 {
+	var xCoord = 3.02;
+	var yCoord = 10.02;
+	var zCoord = 3.02;
+	
 	var vertices = [
-        vec3( -10.3, -20.3,  10.3 ),
-        vec3( -10.3,  20.3,  10.3 ),
-        vec3(  10.3,  20.3,  10.3 ),
-        vec3(  10.3, -20.3,  10.3),
-        vec3( -10.3, -20.3, -10.3 ),
-        vec3( -10.3,  20.3, -10.3 ),
-        vec3(  10.3,  20.3, -10.3 ),
-        vec3(  10.3, -20.3, -10.3 )
+        vec3( -xCoord, -yCoord,  zCoord ),
+        vec3( -xCoord,  yCoord,  zCoord ),
+        vec3(  xCoord,  yCoord,  zCoord ),
+        vec3(  xCoord, -yCoord,  zCoord ),
+        vec3( -xCoord, -yCoord, -zCoord ),
+        vec3( -xCoord,  yCoord, -zCoord ),
+        vec3(  xCoord,  yCoord, -zCoord ),
+        vec3(  xCoord, -yCoord, -zCoord )
     ];
 
     var vertexColors = [
