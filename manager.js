@@ -7,7 +7,7 @@ Manager = {
 
     // base inniheldur lenta kubba, á forminu yxz
     setup : function() {
-        this.base = newArray();
+        this.base = new Array();
         for (var i = 0; i < 20; i++) {
             this.base[i] = new Array();
             for (var j = 0; j < 6; j++) {
@@ -17,6 +17,8 @@ Manager = {
                 }
             }
         }
+
+        this.generateBlock();
     },
 
     activeBlocks : null,
@@ -32,15 +34,14 @@ Manager = {
         }
     },
 
-    drawBlockIn : function(x, y, z) {
-       return; 
-    }
-
     updateThenRender : function(ctm) {
         if (Date.now() - this.lastUpdateTime < this.interval) return;
 
+        console.log("tick");
+
         doMove = true;
         for (var i = 0; i < 3; i++) {
+            if (!this.activeBlocks) break;
             var x = this.activeBlocks[i][0];
             var y = this.activeBlocks[i][1];
             var z = this.activeBlocks[i][2];
@@ -50,13 +51,15 @@ Manager = {
             }
         }
 
+        console.log("tick");
         if (doMove) {
-
             for (var i = 0; i < 3; i++) {
+                if (!this.activeBlocks) break;
                 this.activeBlocks[i][0]--;
             }
         } else {
             for (var i = 0; i < 3; i++) {
+                if (!this.activeBlocks) break;
                 var x = this.activeBlocks[i][0];
                 var y = this.activeBlocks[i][1];
                 var z = this.activeBlocks[i][2];
@@ -65,15 +68,30 @@ Manager = {
             }
         }
 
+        console.log("tick");
         // Draw stuff
         
-        for (var x = 0; x < 20; x++) {
-            for (var y = 0; y < 6; y++) {
+        for (var y = 0; y < 20; y++) {
+            for (var x = 0; x < 6; x++) {
                 for (var z = 0; z < 6; z++) {
-                    //teikna kubb
+                    if (this.base[y][x][z] === 1) {
+                        kubbaRender(ctm, x, y, z);
+                    }
+                    console.log(x+", "+y+", "+z);
                 }
             }
         }
+        console.log("tick");
+
+        for (var i = 0; i < 3; i++) {
+            if (!this.activeBlocks) break;
+            var x = this.activeBlocks[i][0];
+            var y = this.activeBlocks[i][1];
+            var z = this.activeBlocks[i][2];
+           
+            kubbaRender(x, y, z);
+        }
+        console.log("tick");
 
         this.lastUpdateTime = Date.now();
     }

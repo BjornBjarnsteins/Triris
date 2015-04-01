@@ -258,8 +258,9 @@ function render()
     
    	gridrender(ctm);
 		
-	kubbaRender(ctm, xTrans, yTrans, zTrans);
+	//kubbaRender(ctm, xTrans, yTrans, zTrans);
 
+        Manager.updateThenRender(ctm);
 
 	//console.log("xTrans = " + xTrans + " yTrans = "+ yTrans + " zTrans = " + zTrans);
 	
