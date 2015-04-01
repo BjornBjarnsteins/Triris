@@ -83,6 +83,7 @@ function createStrings() {
 	
 }
 
+
 function quad(a, b, c, d) 
 {
 	var vertices = [

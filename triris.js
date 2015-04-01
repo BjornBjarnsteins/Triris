@@ -30,7 +30,7 @@ var spinY = 0;
 var origX;
 var origY;
 
-var zDist = -14.0;
+var zDist = -20.0;
 
 var proLoc;
 var mvLoc;
@@ -130,6 +130,7 @@ window.onload = function init()
             	break;
             case 88:	//x
             	break;
+
             case 67:	//c
             	break;
         	}
@@ -170,7 +171,7 @@ function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    var proj = perspective( 90.0, 1.0, 0.2, 100.0 );
+    var proj = perspective( 120.0, 1.0, 0.2, 50.0 );
     gl.uniformMatrix4fv(proLoc, false, flatten(proj));
     
     var ctm = lookAt( vec3(0.0, 0.0, zDist), vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0) );
@@ -182,7 +183,8 @@ function render()
    	gridrender(ctm);
 		
 	tetrarender(ctm, xTrans, yTrans);
-	
+
+
 	console.log("xTrans = " + xTrans + " yTrans = "+ yTrans + " zTrans = " + zTrans);
 	
 	
