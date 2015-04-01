@@ -20,12 +20,12 @@ function colorCube()
 }
 
 function createStrings() {
-	var xCoord = 10.03;
-	var yCoord = 20.03;
-	var zCoord = 10.03;
+	var xCoord = 10.2;
+	var yCoord = 20.2;
+	var zCoord = 10.2;
 	
-	var yChange = (gridY / 2) + 0.3;
-	var zChange = (gridZ / 2) + 0.3;
+	var yChange = (gridY / 2)+0.2;
+	var zChange = (gridZ / 2)+0.2;
 	for (var i = 0; i < 6; i++) {
 		//Horizontal
 		points.push([-xCoord, -yCoord, gridZ - zChange ]);
@@ -86,14 +86,14 @@ function createStrings() {
 function quad(a, b, c, d) 
 {
 	var vertices = [
-        vec3( -10.05, -20.05,  10.05 ),
-        vec3( -10.05,  20.05,  10.05 ),
-        vec3(  10.05,  20.05,  10.05 ),
-        vec3(  10.05, -20.05,  10.05),
-        vec3( -10.05, -20.05, -10.05 ),
-        vec3( -10.05,  20.05, -10.05 ),
-        vec3(  10.05,  20.05, -10.05 ),
-        vec3(  10.05, -20.05, -10.05 )
+        vec3( -10.3, -20.3,  10.3 ),
+        vec3( -10.3,  20.3,  10.3 ),
+        vec3(  10.3,  20.3,  10.3 ),
+        vec3(  10.3, -20.3,  10.3),
+        vec3( -10.3, -20.3, -10.3 ),
+        vec3( -10.3,  20.3, -10.3 ),
+        vec3(  10.3,  20.3, -10.3 ),
+        vec3(  10.3, -20.3, -10.3 )
     ];
 
     var vertexColors = [

@@ -6,9 +6,12 @@ var stringVertices = 12 * 6 + 20 * 6;
 var tetraStart = stringVertices + NumVertices;
 var tetraCheck = false;
 
-var yTrans = 10.5;
-var xTrans = -1.0;
+var yTrans = 0.0;
+var xTrans = 0.0;
 var zTrans = 0.0;
+
+var width = 20/6;
+var height = 2.0;
 
 var points = [];
 var colors = [];
@@ -40,7 +43,7 @@ window.onload = function init()
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
     makeGrid();
-    tetra(1.0, 0.5, 1.0);
+    kubbur(3.0, 2.0, 2.0);
 	
     
     gl.viewport( 0, 0, canvas.width, canvas.height );
@@ -101,16 +104,20 @@ window.onload = function init()
      window.addEventListener("keydown", function(e){
          switch( e.keyCode ) {
              case 38:	// upp ör
-                if (yTrans < 9.5) yTrans += 1.0;
+                //if (yTrans < 9.5)
+                 yTrans += height;
                 break;
             case 40:	// niður ör
-                if (yTrans > -9.5) yTrans -= 1.0;
+                //if (yTrans > -9.5) 
+                yTrans -= height;
                 break;
             case 37:	//vinstri ör
-            	if (xTrans <= 4.0) xTrans += 2.0;
+            	//if (xTrans <= 4.0) 
+            	xTrans += width;
             	break;
             case 39:	//hægri ör
-            	if (xTrans >= -4.0) xTrans -= 2.0;
+            	//if (xTrans >= -4.0) 
+            	xTrans -= width;
             	break;
             case 65:	//a
             	
