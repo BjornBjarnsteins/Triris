@@ -32,7 +32,8 @@ var spinY = 0;
 var origX;
 var origY;
 
-var zDist = -10.0;
+var zDist = -40.0;
+
 
 var proLoc;
 var mvLoc;
@@ -246,7 +247,7 @@ function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    var proj = perspective( 120.0, 1.0, 0.2, 50.0 );
+    var proj = perspective( 60.0, 1.0, 0.2, 100.0 );
     gl.uniformMatrix4fv(proLoc, false, flatten(proj));
     
     var ctm = lookAt( vec3(0.0, 0.0, zDist), vec3(0.0, 0.0, 0.0), vec3(0.0, 1.0, 0.0) );
