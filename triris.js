@@ -3,8 +3,10 @@ var gl;
 
 var NumVertices  = 36;
 var stringVertices = 12 * 6 + 20 * 6;
-var tetraStart = stringVertices + NumVertices;
+var kubbaStart = stringVertices + NumVertices;
 var tetraCheck = false;
+var kubbaVertices = 0;
+var kubbaCount = 0;
 
 var yTrans = 0.0;
 var xTrans = 0.0;
@@ -43,7 +45,9 @@ window.onload = function init()
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
     makeGrid();
-    kubbur(3.0, 2.0, 2.0);
+    kubbur(3.0, 12.0, 2.0);
+    kubbur(5.0, 10.0, 4.0);
+    kubbur(2.0, 11.0, 5.0);
 	
     
     gl.viewport( 0, 0, canvas.width, canvas.height );
