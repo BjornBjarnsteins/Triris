@@ -54,11 +54,10 @@ Manager = {
             }
         }
 
-        console.log("tick");
         if (doMove) {
             for (var i = 0; i < 3; i++) {
                 if (!this.activeBlocks) break;
-                this.activeBlocks[i][0]--;
+                this.activeBlocks[i][1]--;
             }
         } else {
             for (var i = 0; i < 3; i++) {
@@ -71,7 +70,6 @@ Manager = {
             }
         }
 
-        console.log("tick");
         // Draw stuff
         
         for (var y = 0; y < 20; y++) {
@@ -80,11 +78,9 @@ Manager = {
                     if (this.base[y][x][z] === 1) {
                         kubbaRender(ctm, x, y, z);
                     }
-                    console.log(x+", "+y+", "+z);
                 }
             }
         }
-        console.log("tick");
 
         for (var i = 0; i < 3; i++) {
             if (!this.activeBlocks) break;
@@ -94,7 +90,6 @@ Manager = {
            
             kubbaRender(ctm, x, y, z);
         }
-        console.log("tick");
 
         this.lastUpdateTime = Date.now();
     }
