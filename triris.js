@@ -20,8 +20,8 @@ var axis = 0;
 var theta = [ 0, 0, 0 ];
 
 var movement = false;     // Do we rotate?
-var spinX = 0;
-var spinY = 0;
+var spinX = -15;
+var spinY = -15;
 var origX;
 var origY;
 
@@ -87,8 +87,8 @@ window.onload = function init()
 
     canvas.addEventListener("mousemove", function(e){
         if(movement) {
-    	    spinY = ( spinY + (e.offsetX - origX) ) % 360;
-            spinX = ( spinX + (origY - e.offsetY) ) % 360;
+    	    //spinY = ( spinY + (e.offsetX - origX) ) % 360;
+            //spinX = ( spinX + (origY - e.offsetY) ) % 360;
             origX = e.offsetX;
             origY = e.offsetY;
         }
