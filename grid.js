@@ -1,5 +1,5 @@
-var gridZ = 12.0;
-var gridY = 20.0;
+var gridZ = 20.0;
+var gridY = 40.0;
 
 var NumVertices  = 36;
 var stringVertices = 12 * 6 + 20 * 6;
@@ -20,22 +20,26 @@ function colorCube()
 }
 
 function createStrings() {
-	var yChange = 10.05;
-	var zChange = 6.05;
+	var xCoord = 10.03;
+	var yCoord = 20.03;
+	var zCoord = 10.03;
+	
+	var yChange = (gridY / 2) + 0.3;
+	var zChange = (gridZ / 2) + 0.3;
 	for (var i = 0; i < 6; i++) {
 		//Horizontal
-		points.push([-6.05, -10.05, gridZ - zChange ]);
-   	 	points.push([ 6.05, -10.05, gridZ - zChange]);
-   	 	points.push([-6.05,  10.05, gridZ - zChange ]);
-   	 	points.push([-6.05, -10.05, gridZ - zChange]);
-   	 	points.push([6.05,  10.05, gridZ - zChange ]);
-   	 	points.push([6.05, -10.05, gridZ - zChange]);
-   	 	points.push([6.05,  10.05, gridZ - zChange ]);
-   	 	points.push([6.05, -10.05, gridZ - zChange]);
-   	 	points.push([gridZ - zChange, 10.05, 6.05]);
-    	points.push([gridZ - zChange, -10.05,6.05]);
-    	points.push([gridZ - zChange, -10.05, 6.05]);
-    	points.push([gridZ - zChange, -10.05,-6.05]);
+		points.push([-xCoord, -yCoord, gridZ - zChange ]);
+   	 	points.push([ xCoord, -yCoord, gridZ - zChange]);
+   	 	points.push([-xCoord,  yCoord, gridZ - zChange ]);
+   	 	points.push([-xCoord, -yCoord, gridZ - zChange]);
+   	 	points.push([xCoord,  yCoord, gridZ - zChange ]);
+   	 	points.push([xCoord, -yCoord, gridZ - zChange]);
+   	 	points.push([xCoord,  yCoord, gridZ - zChange ]);
+   	 	points.push([xCoord, -yCoord, gridZ - zChange]);
+   	 	points.push([gridZ - zChange, yCoord, zCoord]);
+    	points.push([gridZ - zChange, -yCoord,zCoord]);
+    	points.push([gridZ - zChange, -yCoord, zCoord]);
+    	points.push([gridZ - zChange, -yCoord,-zCoord]);
    		
    		colors.push([ 0.0, 0.0, 0.0, 1.0 ]);
     	colors.push([ 0.0, 0.0, 0.0, 1.0 ]);
@@ -50,7 +54,7 @@ function createStrings() {
    		colors.push([ 0.0, 0.0, 0.0, 1.0 ]);
    		colors.push([ 0.0, 0.0, 0.0, 1.0 ]);
    		
-   		zChange += 12/6;
+   		zChange += gridZ/6;
    	}
    		
     
@@ -58,12 +62,12 @@ function createStrings() {
 	//zChange = 5.0;
 	for (var i = 0; i < 20; i++) {
 		//Vertical
-   		points.push([-6.01, gridY - yChange, -6.01]);
-    	points.push([-6.01, gridY - yChange,  6.01]);
-    	points.push([6.01, gridY - yChange, -6.01]);
-    	points.push([6.01, gridY - yChange,  6.01]);
-    	points.push([6.01, gridY - yChange,  6.01]);
-    	points.push([-6.01, gridY - yChange, 6.01]);
+   		points.push([-xCoord, gridY - yChange, -zCoord]);
+    	points.push([-xCoord, gridY - yChange,  zCoord]);
+    	points.push([xCoord, gridY - yChange, -zCoord]);
+    	points.push([xCoord, gridY - yChange,  zCoord]);
+    	points.push([xCoord, gridY - yChange,  zCoord]);
+    	points.push([-xCoord, gridY - yChange, zCoord]);
     	
    		
    		colors.push([ 0.0, 0.0, 0.0, 1.0 ]);
@@ -74,7 +78,7 @@ function createStrings() {
     	colors.push([ 0.0, 0.0, 0.0, 1.0 ]);
     	
     	
-    	yChange += 1.0;
+    	yChange += 2.0;
 	}
 	
 }
@@ -82,14 +86,14 @@ function createStrings() {
 function quad(a, b, c, d) 
 {
 	var vertices = [
-        vec3( -6.05, -10.05,  6.05 ),
-        vec3( -6.05,  10.05,  6.05 ),
-        vec3(  6.05,  10.05,  6.05 ),
-        vec3(  6.05, -10.05,  6.05),
-        vec3( -6.05, -10.05, -6.05 ),
-        vec3( -6.05,  10.05, -6.05 ),
-        vec3(  6.05,  10.05, -6.05 ),
-        vec3(  6.05, -10.05, -6.05 )
+        vec3( -10.05, -20.05,  10.05 ),
+        vec3( -10.05,  20.05,  10.05 ),
+        vec3(  10.05,  20.05,  10.05 ),
+        vec3(  10.05, -20.05,  10.05),
+        vec3( -10.05, -20.05, -10.05 ),
+        vec3( -10.05,  20.05, -10.05 ),
+        vec3(  10.05,  20.05, -10.05 ),
+        vec3(  10.05, -20.05, -10.05 )
     ];
 
     var vertexColors = [
@@ -118,4 +122,11 @@ function quad(a, b, c, d)
         // for solid colored faces use 
         colors.push(vertexColors[a]);    
     } 
+}
+
+function gridrender(ctm)	{
+	gl.uniformMatrix4fv(mvLoc, false, flatten(ctm));
+	
+	gl.drawArrays( gl.LINES, 0, stringVertices);
+	gl.drawArrays( gl.TRIANGLES, stringVertices, NumVertices );	
 }

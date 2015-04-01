@@ -6,11 +6,13 @@ var stringVertices = 12 * 6 + 20 * 6;
 var tetraStart = stringVertices + NumVertices;
 var tetraCheck = false;
 
-var yTrans = 0.5;
-var xTrans = 1.0;
+var yTrans = 10.5;
+var xTrans = -1.0;
+var zTrans = 0.0;
 
 var points = [];
 var colors = [];
+var gridCube = [];
 
 var xAxis = 0;
 var yAxis = 1;
@@ -20,8 +22,8 @@ var axis = 0;
 var theta = [ 0, 0, 0 ];
 
 var movement = false;     // Do we rotate?
-var spinX = -15;
-var spinY = -15;
+var spinX = 0;
+var spinY = 0;
 var origX;
 var origY;
 
@@ -38,7 +40,8 @@ window.onload = function init()
     if ( !gl ) { alert( "WebGL isn't available" ); }
 
     makeGrid();
-    makeTetra();
+    tetra(1.0, 0.5, 1.0);
+	
     
     gl.viewport( 0, 0, canvas.width, canvas.height );
     gl.clearColor( 0.9, 1.0, 1.0, 1.0 );
@@ -87,8 +90,8 @@ window.onload = function init()
 
     canvas.addEventListener("mousemove", function(e){
         if(movement) {
-    	    //spinY = ( spinY + (e.offsetX - origX) ) % 360;
-            //spinX = ( spinX + (origY - e.offsetY) ) % 360;
+    	    spinY = ( spinY + (e.offsetX - origX) ) % 360;
+            spinX = ( spinX + (origY - e.offsetY) ) % 360;
             origX = e.offsetX;
             origY = e.offsetY;
         }
@@ -108,6 +111,19 @@ window.onload = function init()
             	break;
             case 39:	//hægri ör
             	if (xTrans >= -4.0) xTrans -= 2.0;
+            	break;
+            case 65:	//a
+            	
+            	break;
+            case 83:	//s
+            	break;
+            case 68:	//d
+            	break;
+            case 90:	//z
+            	break;
+            case 88:	//x
+            	break;
+            case 67:	//c
             	break;
         	}
      }  );  
@@ -143,10 +159,6 @@ function scale4( x, y, z )
     return result;
 }
 
-function makeTetra() {
-	tetra();
-}
-
 function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -158,17 +170,14 @@ function render()
     ctm = mult( ctm, rotate( parseFloat(spinX), [1, 0, 0] ) );
     ctm = mult( ctm, rotate( parseFloat(spinY), [0, 1, 0] ) );
     
-    gl.uniformMatrix4fv(mvLoc, false, flatten(ctm));
+    //makeTetra(xTrans, yTrans, zTrans); 
+    
+   	gridrender(ctm);
+		
+	tetrarender(ctm, xTrans, yTrans);
 	
-	gl.drawArrays( gl.LINES, 0, stringVertices);
-	gl.drawArrays( gl.TRIANGLES, stringVertices, NumVertices );
+	console.log("xTrans = " + xTrans + " yTrans = "+ yTrans + " zTrans = " + zTrans);
 	
-	//if (tetraCheck) {
-	
-	var ctm1 = mult ( ctm, translate(xTrans, yTrans, 1.0));
-	
-	gl.uniformMatrix4fv(mvLoc, false, flatten(ctm1));
-	gl.drawArrays( gl.TRIANGLES, tetraStart, NumVertices );
 	
 	
 

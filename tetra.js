@@ -1,24 +1,28 @@
-function tetra()
-{
-    tetraQuad( 1, 0, 3, 2 );
-    tetraQuad( 2, 3, 7, 6 );
-    tetraQuad( 3, 0, 4, 7 );
-    tetraQuad( 6, 5, 1, 2 );
-    tetraQuad( 4, 5, 6, 7 );
-    tetraQuad( 5, 4, 0, 1 );
+function makeTetra(x,y,z) {
+	gridCube.push([x, y, z]);
 }
 
-function tetraQuad(a, b, c, d) 
+function tetra(x, y, z)
+{
+    tetraQuad( 1, 0, 3, 2, x, y, z );
+    tetraQuad( 2, 3, 7, 6, x, y, z );
+    tetraQuad( 3, 0, 4, 7, x, y, z );
+    tetraQuad( 6, 5, 1, 2, x, y, z );
+    tetraQuad( 4, 5, 6, 7, x, y, z );
+    tetraQuad( 5, 4, 0, 1, x, y, z );
+}
+
+function tetraQuad(a, b, c, d, x, y, z) 
 {
 	var vertices = [
-        vec3( -1.0, -0.5,  1.0 ),
-        vec3( -1.0,  0.5,  1.0 ),
-        vec3(  1.0,  0.5,  1.0 ),
-        vec3(  1.0, -0.5,  1.0 ),
-        vec3( -1.0, -0.5, -1.0 ),
-        vec3( -1.0,  0.5, -1.0 ),
-        vec3(  1.0,  0.5, -1.0 ),
-        vec3(  1.0, -0.5, -1.0 )
+        vec3( -x, -y,  z ),
+        vec3( -x,  y,  z ),
+        vec3(  x,  y,  z ),
+        vec3(  x, -y,  z ),
+        vec3( -x, -y, -z ),
+        vec3( -x,  y, -z ),
+        vec3(  x,  y, -z ),
+        vec3(  x, -y, -z )
     ];
 
     var vertexColors = [
@@ -48,3 +52,21 @@ function tetraQuad(a, b, c, d)
         colors.push(vertexColors[7]);    
     } 
 }
+
+function tetrarender(ctm, xTrs, yTrs) {
+	var ctmTetra = mult ( ctm, translate(xTrs, yTrs, 1.0));
+	
+	gl.uniformMatrix4fv(mvLoc, false, flatten(ctmTetra));
+	gl.drawArrays( gl.TRIANGLES, tetraStart, NumVertices );
+	
+	var ctmTetra1 = mult (ctmTetra, translate(2.0, 0.0, 0.0));
+	
+	gl.uniformMatrix4fv(mvLoc, false, flatten(ctmTetra1));
+	gl.drawArrays( gl.TRIANGLES, tetraStart, NumVertices );
+	
+	var ctmTetra2 = mult (ctmTetra, translate(2.0, 1.0, 0.0));
+	
+	gl.uniformMatrix4fv(mvLoc, false, flatten(ctmTetra2));
+	gl.drawArrays( gl.TRIANGLES, tetraStart, NumVertices );
+}
+	
