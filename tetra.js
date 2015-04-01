@@ -1,10 +1,8 @@
-
 function kubbaRender(ctm, x, y, z) {
-	//var kubbaReset = kubbaStart;
-	x = ((x * width) - 2);
-	z = ((z * width) - 2);
-	y = ((y * height) - 9);
-	
+	x -= 2;
+	y -= 9;
+	z -= 2;
+
 	var ctmTetra = mult ( ctm, translate(x, y, z));
 	
 	gl.uniformMatrix4fv(mvLoc, false, flatten(ctmTetra));

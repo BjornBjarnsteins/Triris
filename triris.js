@@ -4,6 +4,7 @@ var gl;
 var NumVertices  = 36;
 var stringVertices = 12 * 6 + 20 * 6;
 var kubbaStart = stringVertices + NumVertices;
+
 var yTrans = 0.0;
 var xTrans = 0.0;
 var zTrans = 0.0;
@@ -11,9 +12,6 @@ var zTrans = 0.0;
 var gridZ = 6.0;
 var gridY = 20.0;
 var gridX = 6.0;
-
-var width = gridZ/6;
-var height = gridY/20.0;
 
 var points = [];
 var colors = [];
@@ -107,22 +105,21 @@ window.onload = function init()
          switch( e.keyCode ) {
              case 38:	// upp ör
                 //if (yTrans < 9.5)
-                 yTrans += height;
+                 zTrans += 1;
                 break;
             case 40:	// niður ör
                 //if (yTrans > -9.5) 
-                yTrans -= height;
+                zTrans -= 1;
                 break;
             case 37:	//vinstri ör
             	//if (xTrans <= 4.0) 
-            	xTrans += width;
+            	xTrans += 1;
             	break;
             case 39:	//hægri ör
             	//if (xTrans >= -4.0) 
-            	xTrans -= width;
+            	xTrans -= 1;
             	break;
             case 65:	//a
-            	
             	break;
             case 83:	//s
             	break;
@@ -132,7 +129,6 @@ window.onload = function init()
             	break;
             case 88:	//x
             	break;
-
             case 67:	//c
             	break;
         	}
