@@ -6,6 +6,8 @@ function makeTetra(x,y,z) {
 
 function kubbur(x, y, z)
 {
+	kubbaCount++;
+	kubbaVertices += 36;
     tetraQuad( 1, 0, 3, 2, x, y, z );
     tetraQuad( 2, 3, 7, 6, x, y, z );
     tetraQuad( 3, 0, 4, 7, x, y, z );
@@ -61,10 +63,14 @@ function tetraQuad(a, b, c, d, x, y, z)
 }
 
 function tetrarender(ctm, xTrs, yTrs) {
+	var kubbaReset = kubbaStart;
 	var ctmTetra = mult ( ctm, translate(xTrs, yTrs, 1.0));
 	
 	gl.uniformMatrix4fv(mvLoc, false, flatten(ctmTetra));
-	gl.drawArrays( gl.TRIANGLES, tetraStart, NumVertices );
+	for (var i = 0; i < kubbaCount; i++) {
+		gl.drawArrays( gl.TRIANGLES, kubbaReset, NumVertices );
+		kubbaReset += NumVertices;
+		}
 	
 	/*var ctmTetra1 = mult (ctmTetra, translate(2.0, 0.0, 0.0));
 	
