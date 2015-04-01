@@ -32,6 +32,10 @@ Manager = {
         }
     },
 
+    drawBlockIn : function(x, y, z) {
+       return; 
+    }
+
     updateThenRender : function(ctm) {
         if (Date.now() - this.lastUpdateTime < this.interval) return;
 
