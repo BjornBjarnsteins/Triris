@@ -245,7 +245,6 @@ function randomGen() {
 
 function render()
 {
-    gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     var proj = perspective( 60.0, 1.0, 0.2, 100.0 );
     gl.uniformMatrix4fv(proLoc, false, flatten(proj));
@@ -256,7 +255,6 @@ function render()
     
     //makeTetra(xTrans, yTrans, zTrans); 
     
-   	gridrender(ctm);
 		
 	//kubbaRender(ctm, xTrans, yTrans, zTrans);
 

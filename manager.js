@@ -37,6 +37,9 @@ Manager = {
     updateThenRender : function(ctm) {
         if (Date.now() - this.lastUpdateTime < this.interval) return;
 
+        gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+   	gridrender(ctm);
+        
         console.log("tick");
 
         doMove = true;
@@ -89,7 +92,7 @@ Manager = {
             var y = this.activeBlocks[i][1];
             var z = this.activeBlocks[i][2];
            
-            kubbaRender(x, y, z);
+            kubbaRender(ctm, x, y, z);
         }
         console.log("tick");
 
