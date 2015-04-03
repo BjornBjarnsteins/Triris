@@ -6,8 +6,8 @@ var stringVertices = 12 * 6 + 20 * 6;
 var kubbaStart = stringVertices + NumVertices;
 
 var yTrans = 0.0;
-var xTrans = 0.0;
-var zTrans = 0.0;
+var xTrans = 0;
+var zTrans = 0;
 
 var gridZ = 6.0;
 var gridY = 20.0;
@@ -30,7 +30,7 @@ var spinY = 0;
 var origX;
 var origY;
 
-var zDist = -40.0;
+var zDist = -20.0;
 
 
 var proLoc;
@@ -103,9 +103,12 @@ window.onload = function init()
     // Event listener for keyboard
      window.addEventListener("keydown", function(e){
          switch( e.keyCode ) {
+             case 32: //space
+             	Manager.interval = 1;
+             	break;
              case 38:	// upp ör
-                //if (yTrans < 9.5)
-                 zTrans += 1;
+               // if (yTrans < 9.5)
+                zTrans += 1;
                 break;
             case 40:	// niður ör
                 //if (yTrans > -9.5) 
@@ -254,13 +257,13 @@ function render()
 		
 	//kubbaRender(ctm, xTrans, yTrans, zTrans);
 
-        Manager.updateThenRender(ctm);
+    Manager.updateThenRender(ctm, xTrans, zTrans);
+    
+    xTrans = 0;
+    zTrans = 0;
+    Manager.interval = 1000;
 
 	//console.log("xTrans = " + xTrans + " yTrans = "+ yTrans + " zTrans = " + zTrans);
-	
-	
-	
-
     
 
     requestAnimFrame( render );
