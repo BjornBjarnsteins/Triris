@@ -60,6 +60,15 @@ Manager = {
     },	
 
     turn : function(turnDir) {
+        activeBase = this.activeBlocks[1];
+        activeZero = new Array();
+        for (var i = 0; i < 3; i++) {
+            activeZero[i] = new Array();
+            for (var j = 0; j < 3; j++) {
+                activeZero[i][j] = this.activeBlocks[i][j] - activeBase[j];
+            }
+        }
+
         switch (turnDir) {
             case 0:
                 break;
