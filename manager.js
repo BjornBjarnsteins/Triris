@@ -59,6 +59,15 @@ Manager = {
     	}
     },	
 
+    // turn directions:
+
+    xcw  : 0,
+    xccw : 1,
+    ycw  : 2,
+    yccw : 3,
+    zcw  : 4,
+    zccw : 5,
+
     turn : function(turnDir) {
         activeBase = this.activeBlocks[1];
         activeZero = new Array();
@@ -70,30 +79,35 @@ Manager = {
         }
 
         switch (turnDir) {
-            case 0:
+            case this.xcw:
+                rotMat = rotate(90, [1, 0, 0]);
                 break;
-            case 1:
+            case this.xccw:
+                rotMat = rotate(-90, [1, 0, 0]);
                 break;
-            case 2:
+            case this.ycw:
+                rotMat = rotate(90, [0, 1, 0]);
                 break;
-            case 3:
+            case this.yccw:
+                rotMat = rotate(-90, [0, 1, 0]);
                 break;
-            case 4:
+            case this.zcw:
+                rotMat = rotate(90, [0, 0, 1]);
                 break;
-            case 5:
+            case this.zccw:
+                rotMat = rotate(-90, [0, 0, 1]);
                 break;
 
         }
+
+        newActiveBlocks = [];
+
+        for (var i = 0; i < 3; i++) {
+            newActiveBlocks[i] = mult(rotMat, activeZero);
+            // ekki leyfa snúninga ef árekstur
+        }
     },
 
-    // turn directions:
-
-    xcw  : 0,
-    xccw : 1,
-    ycw  : 2,
-    yccw : 3,
-    zcw  : 4,
-    zccw : 5,
     
     eraseFloor : function(j) {
     	for (var i = 0; i < 6; i++) {
