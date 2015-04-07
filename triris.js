@@ -140,6 +140,10 @@ window.onload = function init()
             case 67:	//c
                 Manager.turn(Manager.zccw);
             	break;
+            case 75: //k
+            	Manager.checkLevelCheat = true;
+            	Manager.checkLevelFloor = 0;
+            	break;
         	}
      }  );  
 
@@ -268,7 +272,9 @@ function render()
     xTrans = 0;
     zTrans = 0;
     Manager.interval = 1000;
-
+    console.log(Manager.checkLevelCheat);
+    Manager.checkLevelCheat = false;
+    
 	//console.log("xTrans = " + xTrans + " yTrans = "+ yTrans + " zTrans = " + zTrans);
     
 

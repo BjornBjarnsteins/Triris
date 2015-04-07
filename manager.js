@@ -20,6 +20,10 @@ Manager = {
 
         this.generateBlock();
     },
+    
+    checkLevelCheat : false,
+    
+    checkLevelFloor : 0,
 
     activeBlocks : null,
 
@@ -43,8 +47,8 @@ Manager = {
     },
     
     checkLevel : function() {
-    	
-    	level = 0;
+		
+		level = 0;
     	
     	for (var i = 0; i < 20; i++) {
     		for (var j = 0; j < 6; j++) {
@@ -55,7 +59,8 @@ Manager = {
     		if (level === 36)	{
     			level = 0;
     			this.eraseFloor(i);
-    	}
+    		}
+    		else level = 0;
     	}
     },	
 
@@ -143,7 +148,16 @@ Manager = {
     },
 
     updateThenRender : function(ctm, xtrans, ztrans) {
-         
+        
+    	if (this.checkLevelCheat) {
+    		for (var i = this.checkLevelFloor; i < this.checkLevelFloor+1; i++) {
+    			for (var j = 0; j < 6; j++) {
+    				for (var k = 0; k < 5; k++) {
+    					this.base[j][i][k] = 1;
+    				} 
+    			}
+    		}
+   		} 
          
         var collCheckX = false; 
         var collCheckZ = false;
