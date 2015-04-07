@@ -58,6 +58,33 @@ Manager = {
     	}
     	}
     },	
+
+    turn : function(turnDir) {
+        switch (turnDir) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+
+        }
+    },
+
+    // turn directions:
+
+    xcw  : 0,
+    xccw : 1,
+    ycw  : 2,
+    yccw : 3,
+    zcw  : 4,
+    zccw : 5,
     
     eraseFloor : function(j) {
     	for (var i = 0; i < 6; i++) {
