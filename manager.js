@@ -80,32 +80,54 @@ Manager = {
 
         switch (turnDir) {
             case this.xcw:
-                rotMat = rotate(90, [1, 0, 0]);
+                newActiveBlocks = [];
+                for (var i = 0; i < 3; i++) {
+                    newActiveBlocks[i] = [activeZero[i][0], activeZero[i][2], -activeZero[i][1]];
+                }
                 break;
             case this.xccw:
-                rotMat = rotate(-90, [1, 0, 0]);
+                newActiveBlocks = [];
+                for (var i = 0; i < 3; i++) {
+                    newActiveBlocks[i] = [activeZero[i][0], -activeZero[i][2], activeZero[i][1]];
+                }
                 break;
             case this.ycw:
-                rotMat = rotate(90, [0, 1, 0]);
+                newActiveBlocks = [];
+                for (var i = 0; i < 3; i++) {
+                    newActiveBlocks[i] = [activeZero[i][2], activeZero[i][1], -activeZero[i][0]];
+                }
                 break;
             case this.yccw:
-                rotMat = rotate(-90, [0, 1, 0]);
+                newActiveBlocks = [];
+                for (var i = 0; i < 3; i++) {
+                    newActiveBlocks[i] = [-activeZero[i][2], activeZero[i][1], activeZero[i][0]];
+                }
                 break;
             case this.zcw:
-                rotMat = rotate(90, [0, 0, 1]);
+                newActiveBlocks = [];
+                for (var i = 0; i < 3; i++) {
+                    newActiveBlocks[i] = [-activeZero[i][1], activeZero[i][0], activeZero[i][2]];
+                }
                 break;
             case this.zccw:
-                rotMat = rotate(-90, [0, 0, 1]);
+                newActiveBlocks = [];
+                for (var i = 0; i < 3; i++) {
+                    newActiveBlocks[i] = [activeZero[i][1], -activeZero[i][0], activeZero[i][2]];
+                }
                 break;
 
         }
 
-        newActiveBlocks = [];
-
         for (var i = 0; i < 3; i++) {
-            newActiveBlocks[i] = mult(rotMat, activeZero);
-            // ekki leyfa snúninga ef árekstur
+            for (var j = 0; j < 3; j++) {
+                newActiveBlocks[i][j] = newActiveBlocks[i][j] + activeBase[j];
+            }
         }
+
+
+
+
+        this.activeBlocks = newActiveBlocks;
     },
 
     

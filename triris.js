@@ -122,17 +122,23 @@ window.onload = function init()
             	//if (xTrans >= -4.0) 
             	xTrans -= 1;
             	break;
-            case 65:	//a
+            case 65:    //a
+                Manager.turn(Manager.xcw);
             	break;
             case 83:	//s
+                Manager.turn(Manager.ycw);
             	break;
             case 68:	//d
+                Manager.turn(Manager.zcw);
             	break;
             case 90:	//z
+                Manager.turn(Manager.xccw);
             	break;
             case 88:	//x
+                Manager.turn(Manager.yccw);
             	break;
             case 67:	//c
+                Manager.turn(Manager.zccw);
             	break;
         	}
      }  );  
