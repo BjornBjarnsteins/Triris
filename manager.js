@@ -37,24 +37,24 @@ Manager = {
        	 	this.activeBlocks = [[2, 19, 3], [3, 19, 3], [4, 19, 3]];
        		}
        	else {
-       	//Hinsegin kubbur
+       		this.activeBlocks = [[3, 19, 3], [3, 18, 3], [4, 18, 3]];
        		
        	}
     },
     
     checkLevel : function() {
     	
-    	checkLevel = 0;
+    	level = 0;
     	
     	for (var i = 0; i < 20; i++) {
     		for (var j = 0; j < 6; j++) {
     			for (var k = 0; k < 6; k++) {
-    				if (this.base[j][i][k] === 1) checkLevel++;
+    				if (this.base[j][i][k] === 1) level++;
     			} 
     		}
-    		if (checkLevel === 36)	{
-    			checkLevel = 0;
-    			eraseFloor(i);
+    		if (level === 36)	{
+    			level = 0;
+    			this.eraseFloor(i);
     	}
     	}
     },	
@@ -195,7 +195,7 @@ Manager = {
                 var z = this.activeBlocks[i][2];
                 
                 this.base[x][y][z] = 1;
-                checkLevel();
+                this.checkLevel();
             } 
     		this.generateBlock();
         }
