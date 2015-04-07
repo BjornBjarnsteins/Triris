@@ -142,7 +142,7 @@ window.onload = function init()
             	break;
             case 75: //k
             	Manager.checkLevelCheat = true;
-            	Manager.checkLevelFloor = 0;
+            	Manager.checkLevelFloor++;
             	break;
         	}
      }  );  
@@ -206,7 +206,7 @@ function quad(a, b, c, d)
         //colors.push( vertexColors[indices[i]] );
     
         // for solid colored faces use 
-        colors.push(vertexColors[6]);    
+        colors.push(vertexColors[7]);    
     } 
 }
 //----------------------------------------------------------------------------

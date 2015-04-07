@@ -23,7 +23,7 @@ Manager = {
     
     checkLevelCheat : false,
     
-    checkLevelFloor : 0,
+    checkLevelFloor : -1,
 
     activeBlocks : null,
 
