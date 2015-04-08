@@ -5,6 +5,8 @@ Manager = {
 
     lastUpdateTime : Date.now(),
 
+    score : 0,
+
     // base inniheldur lenta kubba, á forminu xyz
     setup : function() {
         this.base = new Array();
@@ -144,7 +146,15 @@ Manager = {
             	   else this.base[i][t][k] = 0;
             	}
         	}
-        }	
+        }
+        this.score += 100;
+        this.updateScores()
+    },
+
+    updateScores : function () {
+        s = document.getElementById("score");
+
+        s.innerHTML = this.score;
     },
 
     updateThenRender : function(ctm, xtrans, ztrans) {

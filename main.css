@@ -1,0 +1,13 @@
+.scoreboard {
+    font-family: sans-serif;
+    display: inline;
+    float: right;
+}
+
+#score {
+    font-size: 2em;
+}
+
+gl-canvas {
+    display: inline; 
+}
